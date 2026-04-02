@@ -5,9 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class MemberVO {
+public class PostVO {
     private Long id;
-    private String memberEmail;
-    private String memberPassword;
-    private String memberName;
+    private String postTitle;
+    private String postContent;
+    private int postReadCount;
+    private Long memberId;
 }
