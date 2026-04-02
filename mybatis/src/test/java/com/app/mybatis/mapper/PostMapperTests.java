@@ -59,7 +59,7 @@ public class PostMapperTests {
     public void postUpdateReadCountTest(){
         PostVO postVO = new PostVO();
         postVO.setId(2L);
-        postVO.setPostReadCount(1L);
+        postVO.setPostReadCount(4L);
         postMapper.updatePostReadCount(2L);
     }
 
