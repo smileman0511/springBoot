@@ -95,4 +95,8 @@ public class ExampleController {
         return "redirect:/ex/ex06-complete";
     }
 
+    // 테이블 - VO - config - mapper - 인터페이스 매퍼 - 컨트롤러
+
+    // QA 단계: 쿼리 - config - mapper - 인터페이스 - 단위테스트
+
 }

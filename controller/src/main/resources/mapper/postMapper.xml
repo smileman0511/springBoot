@@ -5,8 +5,15 @@
         SELECT CURRENT_TIMESTAMP FROM DUAL
     </select>
 
-    <select id="selectAll">
-        SELECT ID, POST_TITLE, POST_CONTENT, MEMBER_ID, POST_READ_COUNT
-        FROM TBL_POST
+    <select id="selectAll" resultType="PostDTO">
+        SELECT
+            TBP.ID, TBP.POST_TITLE, TBP.POST_CONTENT, TBP.MEMBER_ID, TBP.POST_READ_COUNT,
+            TBM.MEMBER_EMAIL, TBM.MEMBER_NAME
+        FROM TBL_POST TBP
+        JOIN TBL_MEMBER TBM
+        ON TBP.MEMBER_ID = TBM.ID
     </select>
+
+
+
 </mapper>
