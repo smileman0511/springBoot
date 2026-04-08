@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,11 +8,8 @@
     <title>ex03</title>
 </head>
 <body>
-
-    <!-- "홍길동", "장보고", "이순신"을 리스트에 담고 화면에 보낸 후 반복문으로 출력하기 -->
     <div th:each="name : ${names}">
-        <span th:text="${name}"></span>
+        <h1 th:text="${name}"></h1>
     </div>
-
 </body>
 </html>

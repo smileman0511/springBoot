@@ -8,11 +8,7 @@
     <title>ex02</title>
 </head>
 <body>
-    <h1 th:if="${name != null and name != ''}" th:text="${name}"></h1>
-    <h1 th:unless="${name != null and name != ''}" th:text="'비회원'"></h1>
-
-
-
-
+    <h1 th:if="${name != '' and name != null}" th:text="${name}"></h1>
+    <h1 th:unless="${name != '' and name != null}" th:text="${'비회원'}"></h1>
 </body>
 </html>

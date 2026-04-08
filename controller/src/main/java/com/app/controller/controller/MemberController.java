@@ -23,11 +23,11 @@ public class MemberController {
     private final MemberMapper memberMapper;
     private final HttpSession session;
 
-    //    회원 가입
+//    회원 가입
     @GetMapping("join")
     public void goToJoin(MemberVO memberVO){;}
 
-    //    값을 받아서 -> DB에 저장 -> 응답
+//    값을 받아서 -> DB에 저장 -> 응답
     @PostMapping("join")
     public RedirectView join(MemberVO memberVO){
         memberMapper.insert(memberVO);
@@ -37,7 +37,7 @@ public class MemberController {
     @GetMapping("login")
     public void goToLogin(MemberVO memberVO){;}
 
-    //    로그인 실습
+//    로그인 실습
 //    로그인이 완료되면 /members/my-page로 응답
 //    1. 쿼리 작성
 //    select -> 이메일과, 비밀번호 검증 후 회원을 조회하는 쿼리
@@ -87,7 +87,7 @@ public class MemberController {
     };
 
 
-    //    로그아웃
+//    로그아웃
     public RedirectView logout(){
 //      invalidate: 세션 값을 초기화
         session.invalidate();
@@ -95,11 +95,13 @@ public class MemberController {
         return new RedirectView("/members/login");
     }
 
-    //    회원 탈퇴
+//    회원 탈퇴
     @DeleteMapping("withdraw")
     public RedirectView withdraw(){
         MemberVO member = (MemberVO)session.getAttribute("member");
         memberMapper.delete(member.getId());
         return new RedirectView("/members/login");
     }
+
+
 }

@@ -5,24 +5,33 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>회원정보 수정</title>
+    <title>회원 수정</title>
     <style>
-        input{
+        input {
             display: block;
-            margin-block: 10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-<form th:action="@{/members/update}" method="update" th:object="${member}">
+<form th:action="@{/members/update}" method="post" th:object="${member}">
     <input type="hidden" th:field="*{id}" value="*{id}">
-    <input id="memberEmail" name="memberEmail" th:value="*{memberEmail}"/>
-    <input id="memberPassword" name="memberPassword" th:value="*{memberPassword}"/>
-    <input id="memberName" name="memberName" th:value="*{memberName}"/>
-    <button type="submit">회원 수정</button>
+    <input type="text" th:field="*{memberEmail}" th:value="*{memberEmail}" placeholder="이메일" />
+    <input type="password" th:field="*{memberPassword}" th:value="*{memberPassword}" placeholder="비밀번호" />
+    <input type="text" th:field="*{memberName}" th:value="*{memberName}" placeholder="이름" />
+    <button type="button">회원 수정</button>
 </form>
-<script th:inline="javascript">
-    const member =[[${session.member}]]
-</script>
 </body>
+<script>
+    const inputs = document.querySelectorAll("input");
+    const btn = document.querySelector('button');
+    const form = document.querySelector('form');
+
+    btn.addEventListener('click', () => {
+        for(let input of inputs) {
+            if(!input.value) return alert(input.name + " 값이 없습니다.")
+        }
+        form.submit();
+    });
+</script>
 </html>

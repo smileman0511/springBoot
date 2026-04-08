@@ -11,20 +11,21 @@ import java.util.Optional;
 @Slf4j
 @SpringBootTest
 public class MemberMapperTests {
+
     @Autowired
     private MemberMapper memberMapper;
 
     @Test
-    public void memberInsertTest() {
+    public void memberInsertTest(){
         MemberVO memberVO = new MemberVO();
-        memberVO.setMemberEmail("test1212@gmail.com");
+        memberVO.setMemberEmail("test888@gmail.com");
         memberVO.setMemberPassword("1234");
         memberVO.setMemberName("김영희");
         memberMapper.insert(memberVO);
     }
 
     @Test
-    public void selectMemberEmailAndMemberPasswordTest() {
+    public void selectByMemberEmailAndMemberPasswordTest(){
         MemberVO memberVO = new MemberVO();
         memberVO.setMemberEmail("test123@gmail.com");
         memberVO.setMemberPassword("test123");
@@ -33,11 +34,17 @@ public class MemberMapperTests {
     }
 
     @Test
-    public void updateTest() {
+    public void updateTest(){
         MemberVO memberVO = new MemberVO();
-        memberVO.setMemberEmail("test133421@gmail.com");
-        memberVO.setMemberPassword("1234");
+        memberVO.setId(24L);
+        memberVO.setMemberEmail("test12333333@gmail.com");
+        memberVO.setMemberPassword("test123");
         memberVO.setMemberName("홍길동");
         memberMapper.update(memberVO);
+    }
+
+    @Test
+    public void deleteTest(){
+        memberMapper.delete(24L);
     }
 }

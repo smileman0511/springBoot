@@ -9,7 +9,5 @@
     <typeAliases>
         <!-- vo alias -->
         <typeAlias type="com.app.controller.domain.vo.MemberVO" alias="MemberVO"></typeAlias>
-        <typeAlias type="com.app.controller.domain.vo.PostVO" alias="PostVO"></typeAlias>
-
     </typeAliases>
 </configuration>
