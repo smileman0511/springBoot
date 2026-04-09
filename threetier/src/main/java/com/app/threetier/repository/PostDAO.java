@@ -1,9 +1,10 @@
 package com.app.threetier.repository;
 
-// 레포지토리 Repository
+// 레포지토리(Repository)
 // 엔티티에 의해 생성된 데이터베이스 테이블에 직접 접근하는 메서드를 가진 객체 또는 인터페이스
 
 import com.app.threetier.domain.dto.PostDTO;
+import com.app.threetier.domain.vo.PostVO;
 import com.app.threetier.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,13 @@ public class PostDAO {
         return postMapper.select(id);
     }
 
-    public void update(PostDTO postDTO){
-        postMapper.update(postDTO);
+    public void update(PostVO postVO){
+        postMapper.update(postVO);
+    }
+    public void updateReadCount(Long id){
+        postMapper.updateReadCount(id);
+    }
+    public void delete(Long id){
+        postMapper.delete(id);
     }
 }

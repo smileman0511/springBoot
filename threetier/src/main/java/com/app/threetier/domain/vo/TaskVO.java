@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class PostVO {
+public class TaskVO {
     private Long id;
-    private String postTitle;
-    private String postContent;
-    private int postReadCount;
-    private Long memberId;
+    private String studentName;
+    private Long scoreKor;
+    private Long scoreMath;
+    private Long scoreEng;
 }
