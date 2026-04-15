@@ -15,23 +15,15 @@
         WHERE MEMBER_EMAIL = #{memberEmail}
     </select>
 
+    <select id="selectAll" resultType="MemberVO">
+        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NAME
+        FROM TBL_MEMBER
+    </select>
+
     <select id="selectById" parameterType="Long" resultType="MemberVO">
         SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NAME
         FROM TBL_MEMBER
         WHERE ID = #{id}
-    </select>
-
-    <!-- 이메일 + 비밀번호로 회원 조회 -->
-    <select id="selectByEmailAndPassword" resultType="MemberVO">
-        SELECT id, MEMBER_EMAIL, MEMBER_NAME
-        FROM TBL_MEMBER
-        WHERE MEMBER_EMAIL = #{memberEmail}
-          AND MEMBER_PASSWORD = #{memberPassword}
-    </select>
-
-    <select id="selectAll" resultType="MemberVO">
-        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NAME
-        FROM TBL_MEMBER
     </select>
 
     <select id="selectByMemberEmailAndMemberPassword" parameterType="MemberVO" resultType="MemberVO">

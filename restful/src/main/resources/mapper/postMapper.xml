@@ -1,23 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.app.threetier.mapper.PostMapper">
+<mapper namespace="com.app.restful.mapper.PostMapper">
     <select id="getTime" resultType="String">
         SELECT CURRENT_TIMESTAMP FROM DUAL
     </select>
 
-    <select id="selectAll" resultType="PostDTO">
-        SELECT
-            TBP.ID, TBP.POST_TITLE, TBP.POST_CONTENT, TBP.MEMBER_ID, TBP.POST_READ_COUNT,
-            TBM.MEMBER_EMAIL, TBM.MEMBER_NAME
+    <select id="selectAll" resultType="PostListRequestDTO">
+        SELECT TBP.ID, TBP.POST_TITLE, TBP.POST_CONTENT, TBP.POST_READ_COUNT,
+               TBM.MEMBER_EMAIL, TBM.MEMBER_NAME
         FROM TBL_POST TBP
         JOIN TBL_MEMBER TBM
-        ON TBP.MEMBER_ID = TBM.ID
+        ON TBM.ID = TBP.MEMBER_ID
     </select>
 
-    <insert id="insert">
-        INSERT INTO TBL_POST
-        VALUES (SEQ_POST.NEXTVAL, #{postTitle}, #{postContent}, #{memberId}, #{postReadCount})
+    <select id="select" parameterType="Long" resultType="PostDTO">
+        SELECT TBP.ID, TBP.POST_TITLE, TBP.POST_CONTENT, TBP.POST_READ_COUNT,
+               TBM.MEMBER_EMAIL, TBM.MEMBER_NAME
+        FROM TBL_POST TBP
+        JOIN TBL_MEMBER TBM
+        ON TBM.ID = TBP.MEMBER_ID
+        WHERE TBP.ID = #{id}
+    </select>
+
+    <insert id="insert" parameterType="PostVO">
+        INSERT INTO TBL_POST (ID, POST_TITLE), POST_CONTENT, MEMBER_ID, POST_READ_COUNT)
+        VALUES (SEQ_POST.NEXTVAL, #{postTitle}, #{postContent}, #{memberId}, 0)
     </insert>
+
+    <update id="update" parameterType="PostVO">
+        UPDATE TBL_POST
+        SET POST_TITLE = #{postTitle}, POST_CONTENT = #{postContent}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM TBL_POST
+        WHERE ID = #{id}
+    </delete>
+    
+    <delete id="deleteByMemberId" parameterType="Long">
+        DELETE FROM TBL_POST
+        WHERE MEMBER_ID = #{memberId}
+    </delete>
 
 
 

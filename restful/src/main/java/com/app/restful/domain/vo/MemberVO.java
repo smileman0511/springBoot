@@ -16,7 +16,7 @@ public class MemberVO implements Serializable {
     private String memberName;
 
     // 정적 팩토리 메서드
-    public static MemberVO from (MemberJoinRequestDTO memberJoinRequestDTO) {
+    public static MemberVO from (MemberJoinRequestDTO memberJoinRequestDTO){
         MemberVO memberVO = new MemberVO();
         memberVO.setMemberEmail(memberJoinRequestDTO.getMemberEmail());
         memberVO.setMemberPassword(memberJoinRequestDTO.getMemberPassword());
@@ -24,7 +24,7 @@ public class MemberVO implements Serializable {
         return memberVO;
     }
 
-    public static MemberVO from(MemberUpdateRequestDTO memberUpdateRequestDTO) {
+    public static MemberVO from (MemberUpdateRequestDTO memberUpdateRequestDTO){
         MemberVO memberVO = new MemberVO();
         memberVO.setId(memberUpdateRequestDTO.getId());
         memberVO.setMemberPassword(memberUpdateRequestDTO.getMemberPassword());
