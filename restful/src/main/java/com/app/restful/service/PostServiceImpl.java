@@ -1,76 +1,60 @@
 package com.app.restful.service;
 
+import com.app.restful.domain.dto.PostCreateRequestDTO;
 import com.app.restful.domain.dto.PostDTO;
-import com.app.restful.domain.dto.PostListRequestDTO;
+import com.app.restful.domain.dto.PostUpdateRequestDTO;
 import com.app.restful.domain.vo.PostVO;
 import com.app.restful.exception.PostException;
 import com.app.restful.repository.PostDAO;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
-@Slf4j
 @Transactional(rollbackFor = Exception.class)
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 
     private final PostDAO postDAO;
 
-    // 게시글 작성
     @Override
-    public void registerPost(PostVO postVO) {
+    public List<PostDTO> getPostList(String order) {
+        Map<String, String> orders = new HashMap<>();
+        orders.put("order", order);
+        return postDAO.getPosts(orders);
+    }
+
+    @Override
+    public PostDTO getPostDetail(Long id) {
+        return postDAO.getPost(id).orElseThrow(() -> { throw new PostException("게시글을 찾을 수 없습니다", HttpStatus.NOT_FOUND);});
+    }
+
+    @Override
+    public void createPost(PostCreateRequestDTO postCreateRequestDTO, Long memberId) {
+        PostVO postVO = PostVO.from(postCreateRequestDTO);
+        postVO.setMemberId(memberId);
         postDAO.save(postVO);
     }
 
-    // 게시글 목록 조회
     @Override
-    public List<PostListRequestDTO> getAllPosts(){
-        return postDAO.findAll();
-    }
-    
-    // 게시글 상세보기 조회
-    @Override
-    public PostDTO getPostById(Long id) {
-        return postDAO
-                .findById(id)
-                .orElseThrow(() -> new PostException("게시글이 존재하지 않습니다."));
-    }
-
-    // 게시글 수정
-    @Override
-    public void updatePost(PostVO postVO) {
-        postDAO.findById(postVO.getId())
-                .orElseThrow(() -> new PostException("게시글이 존재하지 않습니다."));
+    public void modifyPost(PostUpdateRequestDTO postUpdateRequestDTO, Long id) {
+        PostVO postVO = PostVO.from(postUpdateRequestDTO);
+        postVO.setId(id);
         postDAO.update(postVO);
     }
 
-    // 게시글 삭제
     @Override
-    public void deletePost(Long id) {
-        postDAO.findById(id)
-                .orElseThrow(() -> new PostException("게시글이 존재하지 않습니다."));
+    public void remove(Long id) {
         postDAO.delete(id);
     }
 
-    // 게시글 삭제(탈퇴시)
     @Override
-    public void deletePostByMemberId(Long memberId) {
+    public void removeByMemberId(Long memberId) {
         postDAO.deleteByMemberId(memberId);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
