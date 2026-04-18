@@ -11,6 +11,7 @@
         <typeAlias type="com.app.rest.domain.dto.PostDTO" alias="PostDTO"></typeAlias>
         <typeAlias type="com.app.rest.domain.dto.PostCreateRequestDTO" alias="PostCreateRequestDTO"></typeAlias>
         <typeAlias type="com.app.rest.domain.dto.PostUpdateRequestDTO" alias="PostUpdateRequestDTO"></typeAlias>
+        <typeAlias type="com.app.rest.domain.dto.ApiResponseDTO" alias="ApiResponseDTO"></typeAlias>
 
         <!-- vo alias -->
         <typeAlias type="com.app.rest.domain.vo.PostVO" alias="PostVO"></typeAlias>

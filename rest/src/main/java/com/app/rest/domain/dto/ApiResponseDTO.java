@@ -1,4 +1,4 @@
-package com.app.restful.domain.dto;
+package com.app.rest.domain.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -16,13 +16,12 @@ public class ApiResponseDTO<T> {
     @Schema(description = "응답 데이터")
     private T data;
 
-    public static<T> ApiResponseDTO of(String message){
+    public static<T> ApiResponseDTO of(String message) {
         return new ApiResponseDTO<>(message, null);
     }
 
-    public static<T> ApiResponseDTO<T> of(String message, T data){
+    public static<T> ApiResponseDTO of(String message, T data) {
         return new ApiResponseDTO<>(message, data);
     }
-
 
 }

@@ -1,5 +1,6 @@
 package com.app.rest.api;
 
+import com.app.rest.domain.dto.ApiResponseDTO;
 import com.app.rest.domain.dto.PostCreateRequestDTO;
 import com.app.rest.domain.dto.PostDTO;
 import com.app.rest.domain.dto.PostUpdateRequestDTO;
@@ -10,6 +11,8 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +26,23 @@ public class PostAPI {
     // 모든 게시글 조회
     @Operation(summary = "게시판 목록", description = "게시판 목록 조회 서비스")
     @ApiResponse(responseCode = "200", description = "게시판 목록 조회 성공")
+    @ApiResponse(responseCode = "404", description = "게시판 목록 조회 실패")
+    @Parameter(
+            name = "order",
+            description = "게시글의 정렬을 처리하는 파라미터",
+            schema = @Schema(type = "string"),
+            required = true,
+            in = ParameterIn.QUERY
+    )
     @GetMapping("")
-    public List<PostDTO> getAllPosts() {
-        return postService.getAllPosts();
+    public ResponseEntity<ApiResponseDTO> getAllPosts(
+            @RequestParam(value = "order", defaultValue = "DESC") String order
+    ) {
+        List<PostDTO> postList = postService.getAllPosts(order);
+//        .status: 상태코드 -> mdn 상태코드
+//        .body: 응답 데이터 -> ApiResponseDTO
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(ApiResponseDTO.of("게시글 목록 조회 성공"), postList);
     }
 
 
