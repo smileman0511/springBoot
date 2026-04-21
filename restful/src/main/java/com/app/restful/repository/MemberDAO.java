@@ -1,6 +1,5 @@
 package com.app.restful.repository;
 
-import com.app.restful.domain.dto.MemberJoinRequestDTO;
 import com.app.restful.domain.vo.MemberVO;
 import com.app.restful.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;

@@ -23,6 +23,4 @@ public class ApiResponseDTO<T> {
     public static<T> ApiResponseDTO<T> of(String message, T data){
         return new ApiResponseDTO<>(message, data);
     }
-
-
 }

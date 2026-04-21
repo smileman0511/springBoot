@@ -1,0 +1,26 @@
+package com.app.restful.domain.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+@Data
+public class CongestionDTO {
+//    key 이름이 같으면 생략 가능
+    @JsonProperty("page")
+    private Integer page;
+    private Integer perPage;
+    private Integer totalCount;
+    private Integer currentCount;
+    private Integer matchCount;
+    private List<CongestionDataDTO> data;
+
+//    private List<CongestionDataDTO> data;
+//    또는
+//    @JsonProperty("data")
+//    private List<CongestionDataDTO> congestionDataDTOList;
+
+}

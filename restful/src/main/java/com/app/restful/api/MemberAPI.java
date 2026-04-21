@@ -6,7 +6,6 @@ import com.app.restful.domain.dto.MemberResponseDTO;
 import com.app.restful.domain.dto.MemberUpdateRequestDTO;
 import com.app.restful.domain.vo.MemberVO;
 import com.app.restful.service.MemberService;
-import com.app.restful.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -81,6 +80,7 @@ public class MemberAPI {
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponseDTO.of("로그인 성공", foundMember));
     }
 
+    // 수정
     @Operation(summary = "회원 정보 수정 서비스", description = "회원 정보를 업데이트 시켜주는 서비스")
     @ApiResponse(responseCode = "200", description = "회원 정보 수정 완료")
     @ApiResponse(responseCode = "400", description = "잘못된 접근")
