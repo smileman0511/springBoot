@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.oauth.mapper.OauthMemberMapper">
+    <select id="getTime" resultType="String">
+        SELECT CURRENT_TIMESTAMP FROM DUAL
+    </select>
+
+    <insert id="insert" parameterType="OauthMemberVO">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT SEQ_MEMBER.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_OAUTH_MEMBER
+        VALUES(
+                #{id},
+                #{memberEmail},
+--                default를 쓰고 싶으면 choose문을 사용해라!
+                <choose>
+                    <when test="memberPassword != null">#{memberPassword}</when>
+                    <otherwise>NULL</otherwise>
+                </choose>,
+                <choose>
+                    <when test="memberPicture != null">#{memberPicture}</when>
+                    <otherwise>DEFAULT</otherwise>
+                </choose>,
+                    #{memberName},
+                    #{memberNickName},
+                <choose>
+                    <when test="memberProvider != null">#{memberProvider}</when>
+                    <otherwise>DEFAULT</otherwise>
+                </choose>
+        );
+    </insert>
+
+    <select id="selectAll" resultType="OauthMemberVO">
+        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_PICTURE, MEMBER_NAME, MEMBER_NICKNAME, MEMBER_PROVIDER
+        FROM TBL_OAUTH_MEMBER
+    </select>
+
+    <select id="selectById" parameterType="Long" resultType="OauthMemberVO">
+        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_PICTURE, MEMBER_NAME, MEMBER_NICKNAME, MEMBER_PROVIDER
+        FROM TBL_OAUTH_MEMBER
+        WHERE ID = #{id}
+    </select>
+
+    <select id="selectByMemberEmail" parameterType="OauthMemberVO" resultType="OauthMemberVO">
+        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_PICTURE, MEMBER_NAME, MEMBER_NICKNAME, MEMBER_PROVIDER
+        FROM TBL_OAUTH_MEMBER
+        WHERE MEMBER_EMAIL = #{memberEmail}
+    </select>
+
+    <update id="update" parameterType="OauthMemberVO">
+        UPDATE TBL_OAUTH_MEMBER
+        SET MEMBER_PASSWORD = #{memberPassword}, MEMBER_NAME = #{memberName}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM TBL_OAUTH_MEMBER
+        WHERE ID = #{id}
+    </delete>
+
+</mapper>
